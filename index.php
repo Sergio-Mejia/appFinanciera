@@ -1,3 +1,7 @@
+<?php
+    include('./Class/class_ingreso.php');
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -18,7 +22,7 @@
 
     <!-- Iconos -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" language="javascript" src="./JavasScript/Funciones.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/funciones.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,26 +52,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        <?php
+                            $ing = new Ingresos();
+                            $reg = $ing->Mostrar();
+
+                            for ($i = 0; $i < count($reg); $i++) {
+                                echo "<tr>";
+                                echo "<td>" . $reg[$i]['id'] . "</td>";
+                                echo "<td>" . $reg[$i]['descripcion'] . "</td>";
+                                echo "<td>" . $reg[$i]['valor'] . "</td>";
+                        ?>
+                        <td>
+                            <button class="btn btn-warning" onclick=window.location="./editarI.php?id=<?php echo $reg[$i]['id']; ?>">
+                                <span class="material-icons">mode_edit</span>
+                            </button>
+                            <button class="btn btn-danger" onclick="eliminar('eliminarI.php?id=<?php echo $reg[$i]['id']; ?>')">
+                                <span class="material-icons">cancel</span>
+                            </button>
+                        </td>
+                        <?php
+                        }
+                    ?>
+                    </tr>
                     </tbody>
+                    
                 </table>
+                <tr>
+                        <form action="./Ingreso/insertar.php" method="POST">
+                                <td></td>
+                                <td colspan="2">
+                                    <input type="text" id="descripcion" name="descripcion" placeholder="Descripción">
+                                </td>
+                                <td>
+                                    <input type="number" id="valor" name="valor" placeholder="Valor">
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">
+                                    <span class="material-icons">add_circle</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </form>
             </div>
             <div class="col-lg-6">
                 <h3 align = "center">Egresos</h3>

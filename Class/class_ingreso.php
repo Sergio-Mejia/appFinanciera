@@ -15,18 +15,17 @@
     <!-- Link para animation -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <script type="text/javascript" language="javascript" src="../JavasScript/Funciones.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/funciones.js"></script>
     <title>Gestión Empleados</title>
 </head>
 
 <body>
     <?php
 
-    include("../Conexion/conexion.php");
+    include("./Conexion/conexion.php");
 
-    //clase empleado 
-    class Ingresos
-    {
+    //clase ingresos 
+    class Ingresos{
         private $ingreso;
 
         public function __construct()
