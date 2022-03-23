@@ -22,39 +22,38 @@
 <body>
     <?php
 
-    include("../Conexion/conexion.php");
 
     //clase ingresos 
-    class Ingresos{
-        private $ingreso;
+    class Egresos{
+        private $egreso;
 
         public function __construct()
         {
-            $this->ingreso = array();
+            $this->egreso = array();
         }
 
-        //mostar Ingresos
+        //mostar Egresos
 
         public function Mostrar()
         {
-            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=1";
+            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=2";
             $res = mysqli_query(Conexion::conectar(), $sql);
 
             while ($row = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $row;
+                $this->egreso[] = $row;
             }
-            return $this->ingreso;
+            return $this->egreso;
         }
 
         public function insertar($desc, $valor)
         {
-            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`) VALUES ('$desc', $valor, 1)";
+            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`) VALUES ('$desc', $valor, 2)";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar ingreso");
             echo " 
                 <script type = 'text/javascript'>
                 Swal.fire({
                     title: 'Exito',
-                    text: 'El ingreso se registro correctamente',
+                    text: 'El egreso se registro correctamente',
                     icon: 'success',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
@@ -81,7 +80,7 @@
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El ingreso con id $id fue modificado',
+                text: 'El egreso con id $id fue modificado',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -104,9 +103,9 @@
             $sql = "select * from `ingresos/egresos` where `id` = $id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al buscar");
             if ($reg = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $reg;
+                $this->egreso[] = $reg;
             }
-            return $this->ingreso;
+            return $this->egreso;
         }
 
         public function Eliminar($id)
@@ -117,7 +116,7 @@
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El ingreso con id $id fue eliminado',
+                text: 'El egreso con id $id fue eliminado',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
