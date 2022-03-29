@@ -22,7 +22,6 @@
 <body>
     <?php
 
-    include("../Conexion/conexion.php");
 
     //clase ingresos 
     class Ingresos{
@@ -96,6 +95,17 @@
                 });
             </script>
         ";
+        }
+
+        public function suma()
+        {
+            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=1";
+            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al sumar");
+
+            if ($reg = mysqli_fetch_assoc($res)) {
+                $this->ingreso[] = $reg;
+            }
+            return $this->ingreso;
         }
 
         //Crear una función para capturar el id de los botones de acción 

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <script type="text/javascript" language="javascript" src="../js/funciones.js"></script>
-    <title>Gestión Empleados</title>
+    <title>Egresos</title>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
             return $this->egreso;
         }
 
-        public function insertar($desc, $valor)
+        public function insertar1($desc, $valor)
         {
             $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`) VALUES ('$desc', $valor, 2)";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar ingreso");
@@ -96,6 +96,18 @@
             </script>
         ";
         }
+
+        public function suma()
+        {
+            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=2";
+            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al sumar");
+
+            if ($reg = mysqli_fetch_assoc($res)) {
+                $this->ingreso[] = $reg;
+            }
+            return $this->ingreso;
+        }
+
 
         //Crear una función para capturar el id de los botones de acción 
         public function buscarIngreso($id)

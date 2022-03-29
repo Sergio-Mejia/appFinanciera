@@ -1,6 +1,9 @@
 <?php
+include("../Conexion/conexion.php");
 include('../Class/class_ingreso.php');
 include('../Class/class_egreso.php');
+
+
 ?>
 
 <!doctype html>
@@ -39,6 +42,26 @@ include('../Class/class_egreso.php');
         <h1 style="color:white;">Aplicación Gestión Financiera</h1>
     </nav>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Suma Ingresos</h3>
+                <?php
+                    $ing1 = new Ingresos();
+                    $reg1 = $ing1->suma();
+                ?>
+                <input type="number" value="<?php echo $reg1[0]['respuesta'] ?>" readonly>
+            </div>
+            <div class="col-lg-6">
+                <h3>Suma Egresos</h3>
+                <?php
+                    $eg1 = new Egresos();
+                    $reg2 = $eg1->suma();
+                ?>
+                <input type="number" value="<?php echo $reg2[0]['respuesta'] ?>" readonly>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -82,10 +105,10 @@ include('../Class/class_egreso.php');
                     <form action="../Ingreso/insertar.php" method="POST">
                         <td></td>
                         <td colspan="2">
-                            <input type="text" id="descripcion" name="descripcion" placeholder="Descripción">
+                            <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" required>
                         </td>
                         <td>
-                            <input type="number" id="valor" name="valor" placeholder="Valor">
+                            <input type="number" id="valor" name="valor" placeholder="Valor" required>
                         </td>
                         <td>
                             <button class="btn btn-success">
@@ -119,10 +142,10 @@ include('../Class/class_egreso.php');
                             echo "<td>" . $reg[$i]['valor'] . "</td>";
                         ?>
                             <td>
-                                <button class="btn btn-warning" onclick=window.location="../Ingreso/editar.php?id=<?php echo $reg[$i]['id']; ?>">
+                                <button class="btn btn-warning" onclick=window.location="../Egreso/editarE.php?id=<?php echo $reg[$i]['id']; ?>">
                                     <span class="material-icons">mode_edit</span>
                                 </button>
-                                <button class="btn btn-danger" onclick="eliminar('../Ingreso/eliminarI.php?id=<?php echo $reg[$i]['id']; ?>')">
+                                <button class="btn btn-danger" onclick="eliminar('../Egreso/eliminarE.php?id=<?php echo $reg[$i]['id']; ?>')">
                                     <span class="material-icons">cancel</span>
                                 </button>
                             </td>
@@ -134,13 +157,13 @@ include('../Class/class_egreso.php');
 
                 </table>
                 <tr>
-                    <form action="../Ingreso/insertar.php" method="POST">
+                    <form action="../Egreso/insertarE.php" method="POST">
                         <td></td>
                         <td colspan="2">
-                            <input type="text" id="descripcion" name="descripcion" placeholder="Descripción">
+                            <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" required>
                         </td>
                         <td>
-                            <input type="number" id="valor" name="valor" placeholder="Valor">
+                            <input type="number" id="valor" name="valor" placeholder="Valor" required>
                         </td>
                         <td>
                             <button class="btn btn-success">

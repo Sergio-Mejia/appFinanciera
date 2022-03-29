@@ -1,16 +1,16 @@
 <?php
 include("../Conexion/conexion.php");
-include('../Class/class_ingreso.php');
+include('../Class/class_egreso.php');
 
 
-$ing = new Ingresos();
+$eg = new Egresos();
 
 if (isset($_POST['grabar']) && $_POST['grabar'] == "si") {
-    $ing->editar($_POST['id'], $_POST['descripcion'], $_POST['valor']);
+    $eg->editar($_POST['id'], $_POST['descripcion'], $_POST['valor']);
     exit();
 }
 
-$reg = $ing->buscarIngreso($_GET['id']);
+$reg = $eg->buscarIngreso($_GET['id']);
 ?>
 
 <!doctype html>
@@ -36,14 +36,14 @@ $reg = $ing->buscarIngreso($_GET['id']);
     <script type="text/javascript" language="javascript" src="../js/Funciones.js"></script>
     <link rel="stylesheet" href="../css/style.css">
 
-    <title>Editar Ingreso</title>
+    <title>Editar Egreso</title>
 </head>
 
 <body style="background-color: #8c9091;">
     <div class="container position-absolute top-50 start-50 translate-middle" style="width: 600px; margin:auto;border-radius: 5px;background:white;">
         <table class="table table-borderless">
             <div class="card-body">
-                <h2 class="Centrar">Editar Ingreso</h2>
+                <h2 class="Centrar">Editar Egreso</h2>
                 <hr>
                 <form action="#" method="POST">
                     <input type="hidden" name="grabar" value="si">
