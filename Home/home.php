@@ -2,7 +2,7 @@
 include("../Conexion/conexion.php");
 include('../Class/class_ingreso.php');
 include('../Class/class_egreso.php');
-
+include('../Class/control.php')
 
 ?>
 
@@ -37,32 +37,69 @@ include('../Class/class_egreso.php');
     <title>Aplicación financiera</title>
 </head>
 
-<body>
+<body style="background: -webkit-linear-gradient(bottom right,silver,grey,white); ">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <h1 style="color:white;">Aplicación Gestión Financiera</h1>
     </nav>
+    <div class="container" style="margin-top: 20px;">
+        <div class="row" style="text-align: center;">
+            <?php
+            $control = new Control();
+            if ($control->calculardiferencia() < 0) {
+            ?>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-white" style="background: #AC111B;">
+                    <h3>Saldo En Contra</h3>
+                    <h3><?php echo "$" . $control->calculardiferencia() ?></h3>
+                </div>
+            <?php
+            }
+            
+            if ($control->calculardiferencia() > 0) {
+            ?>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-white" style="background: #4C950F;">
+                    <h3>Saldo a Favor</h3>
+                    <h3><?php echo "$" . $control->calculardiferencia() ?></h3>
+                </div>
+            <?php
+            }
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h3>Suma Ingresos</h3>
-                <?php
-                    $ing1 = new Ingresos();
-                    $reg1 = $ing1->suma();
-                ?>
-                <input type="number" value="<?php echo $reg1[0]['respuesta'] ?>" readonly>
-            </div>
-            <div class="col-lg-6">
-                <h3>Suma Egresos</h3>
-                <?php
-                    $eg1 = new Egresos();
-                    $reg2 = $eg1->suma();
-                ?>
-                <input type="number" value="<?php echo $reg2[0]['respuesta'] ?>" readonly>
-            </div>
+            if ($control->calculardiferencia() == 0) {
+            ?>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-white" style="background: #C8C320;">
+                    <h3>! Saldo Equilibrado ¡</h3>
+                </div>
+            <?php
+            }
+            ?>
+            
+
         </div>
     </div>
     <div class="container">
+        <div class="row">
+            <div class="col-lg-6" style="text-align: right;">
+                <h3>Suma Ingresos</h3>
+                <?php
+                $ing1 = new Ingresos();
+                $reg1 = $ing1->suma();
+                ?>
+
+                <h4>$<?php echo $reg1[0]['respuesta'] ?></h4>
+            </div>
+            <div class="col-lg-6" style="text-align: left;">
+                <h3>Suma Egresos</h3>
+                <?php
+                $eg1 = new Egresos();
+                $reg2 = $eg1->suma();
+                ?>
+                <h4>$<?php echo $reg2[0]['respuesta'] ?></h4>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 50px;">
         <div class="row">
             <div class="col-lg-6">
                 <h3 align="center">Ingresos</h3>
@@ -84,7 +121,7 @@ include('../Class/class_egreso.php');
                             echo "<tr>";
                             echo "<td>" . $reg[$i]['id'] . "</td>";
                             echo "<td>" . $reg[$i]['descripcion'] . "</td>";
-                            echo "<td>" . $reg[$i]['valor'] . "</td>";
+                            echo "<td>$" . $reg[$i]['valor'] . "</td>";
                         ?>
                             <td>
                                 <button class="btn btn-warning" onclick=window.location="../Ingreso/editar.php?id=<?php echo $reg[$i]['id']; ?>">
@@ -139,7 +176,7 @@ include('../Class/class_egreso.php');
                             echo "<tr>";
                             echo "<td>" . $reg[$i]['id'] . "</td>";
                             echo "<td>" . $reg[$i]['descripcion'] . "</td>";
-                            echo "<td>" . $reg[$i]['valor'] . "</td>";
+                            echo "<td>$" . $reg[$i]['valor'] . "</td>";
                         ?>
                             <td>
                                 <button class="btn btn-warning" onclick=window.location="../Egreso/editarE.php?id=<?php echo $reg[$i]['id']; ?>">
