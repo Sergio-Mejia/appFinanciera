@@ -31,8 +31,6 @@
             $this->usuario = array();
         }
 
-        //mostar Empleados
-
         public function insertar($user, $pasw,$mail)
         {
             $sql = "INSERT INTO `usuario`(`usuario`, `contraseña`, `correo`) VALUES ('$user','$pasw','$mail')";
