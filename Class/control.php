@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!doctype html>
 <html lang="es">
 
@@ -35,8 +38,8 @@
             $ing = new Ingresos();
             $eg = new Egresos();
 
-            $reg1= $ing->suma();
-            $reg2= $eg->suma();
+            $reg1= $ing->suma($_SESSION['id']);
+            $reg2= $eg->suma($_SESSION['id']);
 
             return ($reg1[0]['respuesta']-$reg2[0]['respuesta']);
         }

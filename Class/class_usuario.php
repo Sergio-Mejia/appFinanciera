@@ -51,7 +51,7 @@
                       }
                 }).then((result)=>{
                         if(result.value){
-                            window.location ='../Home/home.php';
+                            window.location ='../index.php';
                         }
                     });
                 </script>

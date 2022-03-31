@@ -34,9 +34,9 @@
 
         //mostar Egresos
 
-        public function Mostrar()
+        public function Mostrar($user)
         {
-            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=2";
+            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=2 and `Usuario_idUsuario`=$user";
             $res = mysqli_query(Conexion::conectar(), $sql);
 
             while ($row = mysqli_fetch_assoc($res)) {
@@ -45,9 +45,9 @@
             return $this->egreso;
         }
 
-        public function insertar1($desc, $valor)
+        public function insertar1($desc, $valor,$user)
         {
-            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`) VALUES ('$desc', $valor, 2)";
+            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`,`Usuario_idUsuario`) VALUES ('$desc', $valor, 2,$user)";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar ingreso");
             echo " 
                 <script type = 'text/javascript'>
@@ -97,9 +97,9 @@
         ";
         }
 
-        public function suma()
+        public function suma($id)
         {
-            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=2";
+            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=2 and `Usuario_idUsuario`=$id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al sumar");
 
             if ($reg = mysqli_fetch_assoc($res)) {

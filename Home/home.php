@@ -2,8 +2,7 @@
 include("../Conexion/conexion.php");
 include('../Class/class_ingreso.php');
 include('../Class/class_egreso.php');
-include('../Class/control.php')
-
+include('../Class/control.php');
 ?>
 
 <!doctype html>
@@ -70,7 +69,7 @@ include('../Class/control.php')
             ?>
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-white" style="background: #C8C320;">
-                    <h3>! Saldo Equilibrado ¡</h3>
+                    <h3>¡ Saldo Equilibrado !</h3>
                 </div>
             <?php
             }
@@ -85,7 +84,7 @@ include('../Class/control.php')
                 <h3>Suma Ingresos</h3>
                 <?php
                 $ing1 = new Ingresos();
-                $reg1 = $ing1->suma();
+                $reg1 = $ing1->suma($_SESSION['id']);
                 ?>
 
                 <h4>$<?php echo $reg1[0]['respuesta'] ?></h4>
@@ -94,7 +93,7 @@ include('../Class/control.php')
                 <h3>Suma Egresos</h3>
                 <?php
                 $eg1 = new Egresos();
-                $reg2 = $eg1->suma();
+                $reg2 = $eg1->suma($_SESSION['id']);
                 ?>
                 <h4>$<?php echo $reg2[0]['respuesta'] ?></h4>
             </div>
@@ -116,7 +115,7 @@ include('../Class/control.php')
                     <tbody>
                         <?php
                         $ing = new Ingresos();
-                        $reg = $ing->Mostrar();
+                        $reg = $ing->Mostrar($_SESSION['id']);
 
                         for ($i = 0; $i < count($reg); $i++) {
                             echo "<tr>";
@@ -171,7 +170,7 @@ include('../Class/control.php')
                     <tbody>
                         <?php
                         $eg = new Egresos();
-                        $reg = $eg->Mostrar();
+                        $reg = $eg->Mostrar($_SESSION['id']);
 
                         for ($i = 0; $i < count($reg); $i++) {
                             echo "<tr>";
