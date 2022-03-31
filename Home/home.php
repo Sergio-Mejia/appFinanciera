@@ -40,6 +40,7 @@ include('../Class/control.php')
 <body style="background: -webkit-linear-gradient(bottom right,silver,grey,white); ">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <h1 style="color:white;">Aplicación Gestión Financiera</h1>
+        <a type='button' class='btn btn-outline-danger' style="margin-left: 650px;"href='../logout.php'>Cerrar Sesión</a>
     </nav>
     <div class="container" style="margin-top: 20px;">
         <div class="row" style="text-align: center;">
@@ -54,7 +55,7 @@ include('../Class/control.php')
                 </div>
             <?php
             }
-            
+
             if ($control->calculardiferencia() > 0) {
             ?>
                 <div class="col-md-4"></div>
@@ -74,7 +75,7 @@ include('../Class/control.php')
             <?php
             }
             ?>
-            
+
 
         </div>
     </div>
